@@ -16,7 +16,7 @@ import java.util.List;
  * Controller class for training center operations.
  */
 @RestController
-@RequestMapping("/api/training-centers")
+@RequestMapping("/api/v1/training-centers")
 public class TrainingCenterController {
 
     private static final Logger logger = LoggerFactory.getLogger(TrainingCenterController.class);

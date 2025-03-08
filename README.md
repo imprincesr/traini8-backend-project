@@ -2,8 +2,8 @@
 
 ## Overview
 Traini8 is a Minimum Viable Product (MVP) for a **registry of government-funded training centers**, developed using **Spring Boot**. It provides a REST API to manage training center details with two main endpoints:
-- **POST `/api/training-centers`** – Create a new training center with validated input.
-- **GET `/api/training-centers`** – Retrieve a list of training centers (optionally filtered by `centerName`).
+- **POST `/api/v1/training-centers`** – Create a new training center with validated input.
+- **GET `/api/v1/training-centers`** – Retrieve a list of training centers (optionally filtered by `centerName`).
 
 The project includes robust features like field validation, unique center code enforcement, logging to `logs/traini8.log`, and custom exception handling for reliable error management.
 
@@ -20,8 +20,8 @@ Ensure the following are installed:
 
 ### Clone the Repository
 ```bash
-  git clone <repository-url>
-  cd traini8
+    git clone https://github.com/your-username/traini8-backend-project.git
+    cd traini8-backend-project
 ```
 
 ### Build and Run the Project
@@ -46,12 +46,12 @@ Ensure the following are installed:
 
 ## API Usage
 
-### 1. POST /api/training-centers
+### 1. POST /api/v1/training-centers
 Creates a new training center.
 
 #### Request
 ```bash
-    curl -X POST "http://localhost:8080/api/training-centers" \
+    curl -X POST "http://localhost:8080/api/v1/training-centers" \
     -H "Content-Type: application/json" \
     -d '{
         "centerName": "Tech Training Hub",
@@ -113,12 +113,12 @@ Retrieves all training centers or filters by `centerName`.
 
 #### Request (All Centers)
 ```bash
-  curl -X GET "http://localhost:8080/api/training-centers"
+  curl -X GET "http://localhost:8080/api/v1/training-centers"
 ```
 
 #### Request (Filtered by Name)
 ```bash
-  curl -X GET "http://localhost:8080/api/training-centers?centerName=Tech"
+  curl -X GET "http://localhost:8080/api/v1/training-centers?centerName=Tech"
 ```
 
 #### Response (200 OK)
@@ -128,7 +128,12 @@ Retrieves all training centers or filters by `centerName`.
         "id": 1,
         "centerName": "Tech Training Hub",
         "centerCode": "TTH123456789",
-        "address": { ... },
+        "address": {
+            "detailedAddress": "123 Tech Street",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": "560001"
+        },
         "studentCapacity": 100,
         "coursesOffered": ["Java", "Python"],
         "createdOn": 1649234567890,
@@ -175,15 +180,24 @@ traini8/
 
 ## Logs and Debugging
 - **Log File**: `logs/traini8.log` contains detailed logs of API calls and errors.
-- Clear manually if needed:
-    ```bash
-    echo "" > logs/traini8.log  # Linux/Mac (overwrites with an empty string)
-    echo. > logs\traini8.log  # Windows
-    ```
-- **Tests**: Run unit tests with:
+- **Clear logs manually if needed**:
+    - **Linux/Mac**:
+      ```bash
+      > logs/traini8.log
+      ```
+    - **Windows (Command Prompt - CMD)**:
+      ```bash
+      echo. > logs\traini8.log
+      ```
+    - **Windows (PowerShell)**:
+      ```bash
+      Clear-Content logs\traini8.log
+      ```
+
+- **Run Tests**: Execute unit tests with:
   ```bash
   mvn test
-  ```
+
 
 
 
